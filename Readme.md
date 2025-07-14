@@ -1,24 +1,3 @@
-Great! That README content looks **much more structured and professional** — but there's still one **major issue**:
-
-### ❗️Problem: The folder structure in your README is not formatted correctly.
-
-Right now, it appears as a jumbled single line:
-
-```
-Resume_AI_Analyzer/ ├── main.py # FastAPI backend application ├── requirements.txt ...
-```
-
----
-
-### ✅ Fix: Format Folder Tree as a Code Block
-
-You should wrap the folder structure in a code block so GitHub renders it properly.
-
----
-
-### ✅ Final Polished `README.md`
-
-````markdown
 # 📄 Resume AI Analyzer
 
 An AI-powered resume analyzer built using **FastAPI**, **LangChain**, and **DeepSeek via Ollama**, designed to extract key resume information, match it with job descriptions, and provide ATS-like feedback to enhance your hiring potential.
@@ -162,25 +141,3 @@ Bug reports and feature suggestions are welcome!
 
 ---
 
-````
-
----
-
-### ✅ Next Steps:
-
-1. Replace your current `README.md` with this.
-2. Push to GitHub:
-
-```bash
-git add README.md
-git commit -m "Fix README formatting and folder structure"
-git push
-````
-
-Want help generating:
-
-* `requirements.txt`?
-* `.gitignore`?
-* Badges (like Python version, License, etc.)?
-
-Let me know — happy to help polish the repo more!
