@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume AI Analyzer - Professional HR Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css//style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">🎯</div>
+                    <h1>Resume AI Analyzer</h1>
+                    <p class="tagline">Professional HR Tool</p>
+                </div>
+                <p class="description">
+                    Advanced AI-powered resume analysis tool designed for HR professionals.
+                    Get instant ATS compatibility scores, detailed feedback, and actionable insights.
+                </p>
+                <div class="features-preview">
+                    <div class="feature-badge">
+                        <span class="badge-icon">⚡</span>
+                        <span>Instant Analysis</span>
+                    </div>
+                    <div class="feature-badge">
+                        <span class="badge-icon">🎯</span>
+                        <span>ATS Scoring</span>
+                    </div>
+                    <div class="feature-badge">
+                        <span class="badge-icon">💬</span>
+                        <span>AI Chat Support</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="upload-section">
+            <div class="section-header">
+                <h2>Upload & Analyze Resume</h2>
+                <p>Upload candidate resumes in PDF, DOCX, or TXT format for comprehensive analysis</p>
+            </div>
+
+            <form id="resumeForm" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="resume">
+                            <span class="label-text">📄 Resume File</span>
+                            <span class="label-subtitle">PDF, DOCX, or TXT files supported (Max 10MB)</span>
+                        </label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="resume" name="file" accept=".pdf,.docx,.txt" required>
+                            <div class="file-input-display">
+                                <div class="file-input-content">
+                                    <span class="file-icon">📄</span>
+                                    <div class="file-text-content">
+                                        <span class="file-text">Choose file or drag & drop</span>
+                                        <span class="file-subtext">Supports PDF, DOCX, TXT</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobDescription">
+                        <span class="label-text">📋 Job Description</span>
+                        <span class="label-subtitle">Optional - Paste job description for enhanced keyword matching and
+                            ATS scoring</span>
+                    </label>
+                    <textarea id="jobDescription" name="job_description"
+                        placeholder="Paste the complete job description here for accurate keyword matching and role-specific analysis..."
+                        rows="6"></textarea>
+                    <div class="textarea-footer">
+                        <span class="char-count">0 characters</span>
+                        <span class="textarea-tip">💡 Tip: Including job description improves analysis accuracy by
+                            40%</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="analyze-btn">
+                    <span class="btn-content">
+                        <span class="btn-icon">🔍</span>
+                        <span class="btn-text">Analyze Resume</span>
+                    </span>
+                    <span class="btn-subtitle">Get comprehensive AI analysis</span>
+                </button>
+            </form>
+        </div>
+
+        <div id="loadingSection" class="loading-section" style="display: none;">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <h3>Analyzing Resume...</h3>
+                <p>Our AI is examining the resume for ATS compatibility, keywords, structure, and content quality.</p>
+                <div class="loading-steps">
+                    <div class="step active">📄 Processing document</div>
+                    <div class="step">🔍 Analyzing content</div>
+                    <div class="step">📊 Calculating ATS score</div>
+                    <div class="step">💡 Generating insights</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="results" class="results-section" style="display: none;">
+            <div class="score-card">
+                <div class="score-header">
+                    <h2>ATS Compatibility Score</h2>
+                    <p>Based on industry-standard ATS criteria</p>
+                </div>
+                <div class="score-display">
+                    <div id="score" class="ats-score"></div>
+                    <div class="score-ring">
+                        <svg class="score-circle" width="120" height="120">
+                            <circle cx="60" cy="60" r="50" stroke="#e0e7ff" stroke-width="8" fill="none"></circle>
+                            <circle id="scoreProgress" cx="60" cy="60" r="50" stroke="#667eea" stroke-width="8"
+                                fill="none" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16"
+                                transform="rotate(-90 60 60)"></circle>
+                        </svg>
+                    </div>
+                </div>
+                <div id="scoreDescription" class="score-description"></div>
+            </div>
+
+            <div id="analysis" class="analysis-content"></div>
+        </div>
+
+        <div id="chatArea" class="chat-section" style="display: none;">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <h3>💬 AI Resume Consultant</h3>
+                    <p>Get personalized advice and detailed explanations about the resume analysis</p>
+                </div>
+                <div class="chat-status">
+                    <span class="status-indicator"></span>
+                    <span>AI Assistant Online</span>
+                </div>
+            </div>
+
+            <div id="chatMessages" class="chat-messages tex2jax_process"></div>
+
+            <div class="chat-input-section">
+                <div class="quick-actions">
+                    <span class="quick-actions-label">Quick Questions:</span>
+                    <div class="chat-suggestions">
+                        <button class="suggestion-btn" onclick="askSuggestion('How can I improve the ATS score?')">
+                            🎯 Improve ATS Score
+                        </button>
+                        <button class="suggestion-btn" onclick="askSuggestion('What keywords should be added?')">
+                            🔑 Missing Keywords
+                        </button>
+                        <button class="suggestion-btn" onclick="askSuggestion('How does the experience section look?')">
+                            💼 Experience Review
+                        </button>
+                        <button class="suggestion-btn" onclick="askSuggestion('What are the strongest points?')">
+                            💪 Key Strengths
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chat-input-wrapper">
+                    <div class="input-container">
+                        <input type="text" id="chatInput" placeholder="Ask anything about the resume analysis"
+                            maxlength="500">
+                        <div class="input-actions">
+                            <span class="char-counter">0/500</span>
+                            <button onclick="sendChatMessage()" class="send-btn" id="sendBtn">
+                                <span class="send-icon">➤</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p><strong>Resume AI Analyzer</strong> - Professional HR Tool</p>
+                <p>Powered by Advanced AI • Built with FastAPI & Modern Web Technologies</p>
+            </div>
+            <div class="footer-features">
+                <span>✅ ATS Optimized</span>
+                <span>✅ AI-Powered</span>
+                <span>✅ HR Professional</span>
+                <span>✅ LaTeX Support</span>
+            </div>
+        </div>
+    </footer>
+
+    <div id="errorNotification" class="error-notification" style="display: none;"></div>
+
+    <script src="{{ url_for('static', path='js//script.js') }}"></script>
+
+</body>
+
+</html>
