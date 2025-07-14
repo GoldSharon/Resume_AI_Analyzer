@@ -1,10 +1,24 @@
-Thanks for pointing that out! You're right — the formatting and structure need to be cleaner and more GitHub-friendly.
+Great! That README content looks **much more structured and professional** — but there's still one **major issue**:
 
-Here's a **properly formatted `README.md`** with fixed Markdown syntax, clean sectioning, and a readable folder tree:
+### ❗️Problem: The folder structure in your README is not formatted correctly.
+
+Right now, it appears as a jumbled single line:
+
+```
+Resume_AI_Analyzer/ ├── main.py # FastAPI backend application ├── requirements.txt ...
+```
 
 ---
 
-```markdown
+### ✅ Fix: Format Folder Tree as a Code Block
+
+You should wrap the folder structure in a code block so GitHub renders it properly.
+
+---
+
+### ✅ Final Polished `README.md`
+
+````markdown
 # 📄 Resume AI Analyzer
 
 An AI-powered resume analyzer built using **FastAPI**, **LangChain**, and **DeepSeek via Ollama**, designed to extract key resume information, match it with job descriptions, and provide ATS-like feedback to enhance your hiring potential.
@@ -33,22 +47,20 @@ An AI-powered resume analyzer built using **FastAPI**, **LangChain**, and **Deep
 
 ## 📁 Folder Structure
 
-```
-
-Resume\_AI\_Analyzer/
-├── main.py                 # FastAPI backend application
-├── requirements.txt        # Python dependencies
-├── README.md               # Project documentation
-├── static/                 # Frontend static files
+```text
+Resume_AI_Analyzer/
+├── main.py                  # FastAPI backend application
+├── requirements.txt         # Python dependencies
+├── README.md                # Project documentation
+├── static/                  # Frontend static files
 │   ├── css/
 │   │   └── style.css
 │   └── js/
 │       └── script.js
 ├── templates/
-│   └── index.html          # Jinja2 HTML template
-├── uploaded\_documents/     # Directory for uploaded resumes
-└── .gitignore              # Ignored files and folders
-
+│   └── index.html           # Jinja2 HTML template
+├── uploaded_documents/      # Directory for uploaded resumes
+└── .gitignore               # Git ignored files
 ````
 
 ---
@@ -60,11 +72,11 @@ Resume\_AI\_Analyzer/
 ```bash
 git clone https://github.com/GoldSharon/Resume_AI_Analyzer.git
 cd Resume_AI_Analyzer
-````
+```
 
 ### 2. Install Dependencies
 
-Make sure you have **Python 3.9+** installed:
+Make sure you have **Python 3.9+** installed.
 
 ```bash
 pip install -r requirements.txt
@@ -72,7 +84,7 @@ pip install -r requirements.txt
 
 ### 3. Start Ollama with DeepSeek Model
 
-Ensure Ollama is running locally and the model is available:
+Ensure Ollama is installed and the model is pulled:
 
 ```bash
 ollama run deepseek-r1:7b-qwen-distill
@@ -84,27 +96,29 @@ ollama run deepseek-r1:7b-qwen-distill
 uvicorn main:app --reload
 ```
 
-Open your browser and navigate to: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+Then open your browser and navigate to:
+👉 `http://127.0.0.1:8000`
 
 ---
 
 ## 📌 Example Use Case
 
-1. Upload your resume.
-2. (Optional) Provide a job description.
+1. Upload your resume
+2. Optionally add a job description
 3. The AI analyzes and returns:
 
    * ATS Score
-   * Strengths and Weaknesses
-   * Overall Feedback
+   * Strengths & Weaknesses
+   * Feedback
    * Keyword Matching
-4. You can interact with the AI to ask questions about how to improve your resume.
+
+You can interact with the AI chatbot to improve your resume further.
 
 ---
 
 ## 📄 Requirements
 
-See `requirements.txt` for all dependencies. Core packages include:
+See `requirements.txt`. Key libraries include:
 
 * `fastapi`
 * `uvicorn`
@@ -118,7 +132,7 @@ See `requirements.txt` for all dependencies. Core packages include:
 
 ## ⚖️ License
 
-This project is open-source under the [MIT License](LICENSE).
+MIT License © 2025 Gold Sharon R
 
 ---
 
@@ -128,37 +142,45 @@ This project is open-source under the [MIT License](LICENSE).
 B.Tech in Artificial Intelligence and Machine Learning
 St. Joseph’s College of Engineering, Chennai
 📧 [gold33sharon@gmail.com](mailto:gold33sharon@gmail.com)
-🌐 [GitHub](https://github.com/GoldSharon)
+🌐 [GitHub Profile](https://github.com/GoldSharon)
 
 ---
 
 ## 🌟 Contribute
 
-Feel free to fork this repository and open a pull request. Bug reports and feature suggestions are always welcome!
+Feel free to fork this repository and open a pull request.
+Bug reports and feature suggestions are welcome!
 
 ---
 
 ## 🧠 Future Improvements
 
-* Add user authentication and login system
-* Integrate resume saving and job tracking
-* Enhance prompt tuning for better insights
-* Deploy on cloud (Render, Railway, Heroku, etc.)
+* Add user authentication & login system
+* Save resume analysis history
+* Enhance LLM prompt tuning
+* Deploy to cloud (Render, Railway, Heroku)
+
+---
 
 ````
 
 ---
 
-### ✅ Instructions to Use:
+### ✅ Next Steps:
 
-1. Copy the above into a file named `README.md`.
-2. Place it in the root of your project directory.
-3. Commit it to GitHub:
+1. Replace your current `README.md` with this.
+2. Push to GitHub:
 
 ```bash
 git add README.md
-git commit -m "Add formatted project README"
+git commit -m "Fix README formatting and folder structure"
 git push
 ````
 
-Let me know if you'd like a matching `requirements.txt` or `.gitignore` file!
+Want help generating:
+
+* `requirements.txt`?
+* `.gitignore`?
+* Badges (like Python version, License, etc.)?
+
+Let me know — happy to help polish the repo more!
